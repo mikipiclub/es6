@@ -14,6 +14,7 @@ let count_level = document.getElementById('level');  // 自分のレベル（1�
 let count_pro = 200; // 確率に使う数字 この数字以下だったら勝ち
 let count_away = 250; //逃げられる確率に使う数字
 
+let inner = document.getElementById('inner');
 let direction = document.getElementsByClassName('direction');
 let up = document.getElementById('up');
 let left = document.getElementById('left');
@@ -33,12 +34,17 @@ let numachi = document.getElementById('numachi');
 let map_heichi = [3, 5];
 let map_mori = [6, -4];
 let map_numachi = [-1, -10];
+let h_goal = false;
+let m_goal = false;
+let n_goal = false;
 
 let map = document.getElementById('map');
 let flag = false;
+let flag_escape = false;
 
 // 画像のパス
 let pic = ["./images/teki.png", "./images/teki2.png"];
+let mpic = ["../images/map_heichi.jpg", "./images/map_mori.jpg", "/images/map_numachi.jpg"];
 let steps = [up, left, down, right];
 let max = 50;　//通常の遭遇する歩数
 let he_max = 120;　//平地で遭遇する歩数
@@ -46,15 +52,17 @@ let mo_max = 130; //森で遭遇する歩数
 let nu_max = 140;　//沼地で遭遇する歩数
 
 let randoms = [];
+let intRandom = () => Math.floor(Math.random() * 300 + 1);
+
 let encounterRate = (val) => {
   // 敵に遭遇する歩数
   for (let i = 0; i < val; i++) {
     let ran = intRandom();
     if (!randoms.includes(ran)) {
-      randoms.push(ran);    
+      randoms.push(ran);
     }
   }
-  randoms.sort(function(a, b) {
+  randoms.sort(function (a, b) {
     return (a < b ? -1 : 1);
   });
   console.log(randoms);
@@ -89,7 +97,7 @@ fight.addEventListener('click', () => {
 // 逃げるボタンを押したら
 escape.addEventListener('click', () => {
 
-escapeResult();
+  escapeResult();
 }, false);
 
 // 遭遇した時
@@ -138,40 +146,6 @@ let tokotoko = (steps) => {
       break;
   }
 
-  
-// let mapXY = [
-//   [3, 5],   // 平地にたどり着く座標[X, Y]
-//   [6, -4],  // 森にたどり着く座標
-//   [-1, -10] // 沼地にたどり着く座標
-// ];
-
-// let mapli = map.firstElementChild;
-// console.log(mapli.firstElementChild.className);
-// console.log(mapli.lastElementChild);
-// console.log(mapli.children[0].className);
-
-
-// function distance() {
-// // 平地に着く歩数と遭遇率
-// for (let j = 0; j < mapli.length; j++) {
-
-//   let mgc = mapli.children[j]; //liの子要素2つにアクセス
-//   let mh = mapXY[j][0] - dx.textContent;　//到着座標 - x座標 = 残りの座標
-//   let mh1= mapXY[j][1] - dy.textContent;  //到着座標 - y座標 = 残りの座標
-
-//     switch (mgc.className) {
-//       case 'mapX':
-//         mapX.textContent = mh;
-//         break;
-//       case 'mapY':
-//         mapY.textContent = ay;
-//         break;
-//       default:
-//         break;
-//     }
-//   }
-// }
-
   let mh = map_heichi[0] - dx.textContent,
     mh1 = map_heichi[1] - dy.textContent,
     hc = heichi.children;
@@ -199,28 +173,51 @@ let tokotoko = (steps) => {
       default:
         break;
     }
-
-    /* -----------ここも謎。沼地などを抜けたらもとの表示にしたい----------------*/
-    if (mh <= 0 && mh1 <= 0) {
-      encounterRate(he_max);
-      console.log(randoms);
-      heichi.innerHTML = "here:平地";
-      heichi.style.color = "red";
-    } else if (mo <= 0 && mo1 >= 0) {
-      encounterRate(120);
-      console.log(randoms);
-      mori.innerHTML = "here:森";
-      mori.style.color = "red";
-    } else if (mu >= 0 && mu1 >= 0) {
-      encounterRate(nu_max);
-      console.log(randoms);
-      numachi.innerHTML = "here:沼地";
-      numachi.style.color = "red";
-    } else {
-      ;
-      // numachi.innerHTML = "";
-    }
   }
+  /* ----------- 目的地に到達！ ----------------*/
+
+  // 平地
+  if (mh <= 0 && mh1 <= 0 && !h_goal) {
+    encounterRate(he_max);
+    console.log(randoms);
+    alert('平地にやってきた！');
+    inner.style.backgroundImage = 'url(' + mpic[0] + ')';
+    h_goal = true;
+
+  } else if (mh > 0 && h_goal || mh1 > 0 && h_goal) {
+    alert('平地から抜け出した！');
+    h_goal = false;
+    inner.style.background = 'none';
+  }
+
+  // 森
+  if (mo <= 0 && mo1 >= 0 && !m_goal) {
+    encounterRate(120);
+    console.log(randoms);
+    alert('森にやってきた！');
+    inner.style.backgroundImage = 'url(' + mpic[1] + ')';
+    m_goal = true;
+
+  } else if (mo > 0 && m_goal || mo1 < 0 && m_goal) {
+    alert(' 森から抜け出した！');
+    m_goal = false;
+    inner.style.background = 'none';
+  }
+
+  // 沼地
+  if (mu >= 0 && mu1 >= 0 && !n_goal) {
+    encounterRate(nu_max);
+    console.log(randoms);
+    alert('沼地にやってきた！');
+    inner.style.backgroundImage = 'url(' + mpic[2] + ')';
+    m_goal = true;
+
+  } else if (mu < 0 && n_goal || mu1 < 0 && n_goal) {
+    alert(' 沼地から抜け出した！');
+    n_goal = false;
+    inner.style.background = 'none';
+  }
+
 }/* -----------ここまで----------------*/
 
 let matchResult = () => {
@@ -244,6 +241,7 @@ let matchResult = () => {
       alert('負けた！\n勇者は死んでしまった');
       result.innerHTML = "負けた！<br>勇者は死んでしまった";
     }
+
     for (let i = 0; i < direction.length; i++) {
       direction[i].style.display = "block"
     }
@@ -252,37 +250,41 @@ let matchResult = () => {
     console.log(`${count_level.textContent} ===> レベル`);
     console.log(`${count_win.textContent} ===> 勝った回数`);
     flag = false;
+    flag_escape = false;
     console.log(`flag:` + flag);
   }
-} 
+}
 
-/* -----------ここ分からない。逃げられないが出たら、戦うボタンだけ押せるようにしたい ----*/
-  // ある確率で逃げられる
-  
+/* -----------
+  逃げられないが出たら、戦うボタンだけ押せるようにしたい
+  ----*/
+
+// ある確率で逃げられる
+
 let escapeResult = () => {
   let away = intRandom();
-  if (flag) {
+  if (flag && !flag_escape) {
     if (away > count_away) {
       result.innerHTML = "逃げることができた！";
+
       for (let i = 0; i < direction.length; i++) {
         direction
         [i].style.display = "block";
-        flag = false;
       }
+      flag = false;
+      flag_escape = false;
+
     } else {
       result.innerHTML = "逃げられない！";
-      flag = false;
-      console.log(`flag:` + flag);
+      alert('たたかうしかない！')
+      flag_escape = true;
     }
-    // flag = false;
-    console.log(`flag:` + flag);
+
   }
 }
 
 /* ---r------------ここまで-----------------------*/
 
-
-let intRandom = () => Math.floor(Math.random() * 300 + 1);
 
 // スタートボタンで初期化
 start.addEventListener('click', () => {
