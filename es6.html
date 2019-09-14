@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width", initial-scale=1.0>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="css/es6.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="wrap" class="a">
+    <div class="a" id="inner">
+      <div id="main">
+        <div class="a" id="tekiarea">
+          <img id="teki" src="">
+        </div>
+        <div id="myarea">
+          <img class="mypng" src="images/woman.png">
+          <div class="direction" id="up">前</div>
+          <div class="direction" id="right">右</div>
+          <div class="direction" id="down">後</div>
+          <div class="direction" id="left">左</div>
+        </div>
+        <div id="selectarea">
+          <div class="a" id="select2">
+            <p id="fight">たたかう</p>
+            <p id="escape">にげる</p>
+          </div>
+          <div class="a" id="select3" noshade>
+            <!-- 確率で条件分岐
+              敵が現れた！
+            勝った、負けた
+          逃げた、逃げられない
+        勇者が死んでしまった、 歩く方向を押してください-->
+          </div>
+        </div>
+      </div>
+
+      <div class="a" id="sidearea">
+        <p>LV: <span id="level">1</span></p>
+        <p>[最終到着地点]</p>
+        <ul id="map">
+          <li id="heichi">平地まで 歩数X: <span class="mapX">0</span> 歩数Y: <span class="mapY">0</span></li>
+          <li id="mori">森まで 歩数X: <span class="mapX">0</span> 歩数Y: <span class="mapY">0</span></li>
+          <li id="numachi">沼地まで 歩数X: <span class="mapX">0</span> 歩数Y: <span class="mapY">0</span></li>
+        </ul>
+        <p>歩数X: <span id="dx">0</span></p>
+        <p>歩数Y: <span id="dy">0</span> </p>
+        <br>
+        <p>倒した敵の数: <span id="count-win">0</span></p>
+        <p>敵出現平均歩数: <span id="d-ave">0</span></p>
+        <br>
+        <p>[敵出現ログ]</p>
+        <div class="a" id="stepsarea">
+          <p id="steps"></p>
+        </div>
+        <div class="a" id="start">スタート</div>
+      </div>
+
+    </div>
+  </div>
+  <script src="js/es6.js"></script>
+</body>
+</html>
