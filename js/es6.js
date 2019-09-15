@@ -40,7 +40,7 @@ let n_goal = false;
 
 let map = document.getElementById('map');
 let flag = false;
-let flag_escape = false;
+let flag_escape = true;
 
 // 画像のパス
 let pic = ["./images/teki.png", "./images/teki2.png"];
@@ -250,7 +250,7 @@ let matchResult = () => {
     console.log(`${count_level.textContent} ===> レベル`);
     console.log(`${count_win.textContent} ===> 勝った回数`);
     flag = false;
-    flag_escape = false;
+    flag_escape = true;
     console.log(`flag:` + flag);
   }
 }
@@ -263,7 +263,7 @@ let matchResult = () => {
 
 let escapeResult = () => {
   let away = intRandom();
-  if (flag && !flag_escape) {
+  if (flag && flag_escape) {
     if (away > count_away) {
       result.innerHTML = "逃げることができた！";
 
@@ -272,12 +272,12 @@ let escapeResult = () => {
         [i].style.display = "block";
       }
       flag = false;
-      flag_escape = false;
+      flag_escape = true;
 
     } else {
       result.innerHTML = "逃げられない！";
       alert('たたかうしかない！')
-      flag_escape = true;
+      flag_escape = false;
     }
 
   }
