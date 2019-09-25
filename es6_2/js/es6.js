@@ -234,19 +234,6 @@ class Brave {
 /* 以下の変数をPlaceのインスタンスに格納して使うようにする
 -----------------------------------------
 
-function Dog(name, cry) {
-  this.name = name;
-  this.back = function(){
-    console.log(cry);
-  };
-}
-  var dog = new Dog("太郎", "わんわん");
-  console.log(dog.name);
-  dog.back();
-
-
-
-
 let max         = 50;　//通常の遭遇する歩数
 let he_max      = 90;　//平地で遭遇する歩数
 let mo_max      = 110; //森で遭遇する歩数

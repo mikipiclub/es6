@@ -1,0 +1,165 @@
+.a {
+  border: 2px solid #000000;
+}
+#wrap {
+  width: 1000px;
+  height: 650px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+#inner {
+  padding: 20px;
+  display: flex;
+  height: 607px;
+}
+#main {
+  width: 600px;
+  flex-basis: 70%;
+  margin-right: 20px;
+  z-index: 1;
+}
+#tekiarea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  height: 180px;
+  background: rgba(255, 255, 255, .8);
+}
+#teki {
+  width: 140px;
+}
+#myarea {
+  position: relative;
+  padding: 50px 50px 43px 50px;
+  width: 100px;
+  margin: 0 auto;
+}
+.mypng {
+  width: 105px;
+  height: 90px;
+}
+.direction {
+  border: 2px solid #000000;
+  width: 50px;
+  height: 40px;
+  font-size: 30px;
+  position: absolute;
+  line-height: 40px;
+  background: rgba(255, 255, 255, .8);
+}
+#up {
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+}
+#right {
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto 0;
+}
+#left {
+  left: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto 0;
+}
+#down {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+}
+.click-none {
+  pointer-events: none;
+}
+.click-auto {
+  pointer-events: auto;
+}
+
+#selectarea {
+  display: flex;
+  font-size: 30px;
+  text-align: center;
+  margin: 20px 0 0;
+  height: 195px;
+}
+#selectarea p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 50%;
+  background: rgba(255, 255, 255, .8);
+}
+#select2 {
+  flex-basis: 30%;
+  margin-right: 20px;
+  font-size: 2.5vw;
+  z-index: 10;
+}
+#fight {
+  border-bottom: 2px solid #000000;
+}
+#select3 {
+  flex-basis: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, .8);
+}
+#sidearea {
+  flex-basis: 30%;
+  position: relative;
+  font-size: 14px;
+  text-align: left;
+  padding: 20px;
+  background: rgba(255, 255, 255, .8);
+}
+#sidearea p {
+  margin: 0;
+  line-height: 1.4;
+}
+#stepsarea {
+  height: 35%;
+  position: absolute;
+  width: calc(100% - 44px);
+  overflow-y: scroll;
+  bottom: 90px;
+}
+#map {
+  padding: 0;
+  list-style: none;
+}
+#start {
+  font-size: 30px;
+  width: calc(100% - 44px);
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  min-height: 48px;
+  line-height: 48px;
+}
+
+@media screen and (max-width: 1024px) {
+  #wrap {
+    width: 95%;
+}
+#selectarea {
+  font-size: 1.5em;
+}
+}
+@media screen and (max-width: 768px) {
+  #selectarea {
+    font-size: 20px;
+}
+  #sidearea {
+    font-size: 1.8vw;
+}
+  #start {
+  font-size: 20px;
+}
+}
