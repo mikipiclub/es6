@@ -51,7 +51,7 @@ let h_goal = false;
 let m_goal = false;
 let n_goal = false;
 let flag = false;
-let flag_escape = false;
+let flag_escape = true;
 
 let pic = ["./images/teki.png", "./images/teki2.png"];
 let steps = [up, left, down, right];
@@ -459,7 +459,7 @@ let matchResult = () => {
 
 
     flag = false;
-    flag_escape = false;
+    flag_escape = true;
     console.log(`flag:` + flag);
   }
 }
@@ -469,7 +469,7 @@ let matchResult = () => {
   ----*/
 let escapeResult = () => {
   let away = intRandom();
-  if (flag && !flag_escape) {
+  if (flag && flag_escape) {
     if (away > count_away) {
       result.innerHTML = "逃げることができた！";
 
@@ -478,11 +478,16 @@ let escapeResult = () => {
         [i].style.display = "block";
       }
       flag = false;
-      flag_escape = false;
+      flag_escape = true;
 
     } else {
       result.innerHTML = "逃げられない！";
+<<<<<<< HEAD
       flag_escape = true;
+=======
+      alert('たたかうしかない！')
+      flag_escape = false;
+>>>>>>> 5ede09a3b5e4e8cf0fa9754ac79499b7ed1d511f
     }
   }
 }
